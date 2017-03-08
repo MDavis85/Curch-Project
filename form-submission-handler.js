@@ -5,31 +5,15 @@ function validEmail(email) { // see:
 }
 // get all data in form and return object
 function getFormData() {
-  var elements = document.getElementById("gform").elements; // all form elements
-  var fields = Object.keys(elements).map(function(k) {
-    if(elements[k].name !== undefined) {
-      return elements[k].name;
-    // special case for Edge's html collection
-    }else if(elements[k].length > 0){
-      return elements[k].item(0).name;
-    }
-  }).filter(function(item, pos, self) {
-    return self.indexOf(item) == pos && item;
-  });
-  var data = {};
-  fields.forEach(function(k){
-    data[k] = elements[k].value;
-    if(elements[k].type === "checkbox"){
-      data[k] = elements[k].checked;
-    // special case for Edge's html collection
-    }else if(elements[k].length){
-      for(var i = 0; i < elements[k].length; i++){
-        if(elements[k].item(i).checked){
-          data[k] = elements[k].item(i).value;
-        }
-      }
-    }
-  });
+  var data   = {
+    name : document.getElementById("name").value,
+    address: document.getElementById("address").value,
+    city : document.getElementById("city").value
+    state : document.getElementById("state").value,
+    zipcode : document.getElementById("zipcode").value,
+    email : document.getElementById("email").value,
+    occupation : document.getElementById("occupation").value
+  }
   console.log(data);
   return data;
 }
